@@ -2,6 +2,9 @@ package gerenciador.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,10 +20,20 @@ public class novaEmpresa extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Cadastrando nova empresa");
 		PrintWriter out = response.getWriter();
-		
+		Date data = null;
 		String nomeEmpresa = request.getParameter("nome");
+		String dataAbertura = request.getParameter("data");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			data = sdf.parse(dataAbertura);
+		} catch (ParseException e) {
+			throw new ServletException(e);
+		}
+		
 		Empresa empresa = new Empresa();
 		empresa.setNome(nomeEmpresa);
+		empresa.setDataAbertura(data);
 		
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
