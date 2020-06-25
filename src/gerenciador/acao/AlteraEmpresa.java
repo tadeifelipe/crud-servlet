@@ -13,10 +13,10 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 import gerenciador.modelo.Banco;
 import gerenciador.modelo.Empresa;
 
-public class AlteraEmpresa {
+public class AlteraEmpresa implements Acao {
 
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-System.out.println("Altera Empresa");
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("Altera Empresa");
 		
 		Date data = null;
 		String nomeEmpresa = request.getParameter("nome");
@@ -38,8 +38,7 @@ System.out.println("Altera Empresa");
 		Empresa empresa = banco.buscaEmpresaPeloId(id);
 		empresa.setNome(nomeEmpresa);
 		empresa.setDataAbertura(data);
-		
-		response.sendRedirect("entrada?acao=ListaEmpresas");
+		return "redirect:entrada?acao=ListaEmpresas";
 	}
 	
 }
