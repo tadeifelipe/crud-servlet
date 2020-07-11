@@ -16,6 +16,11 @@
 <title>Insert title here</title>
 </head>
 	<body>		
+		<c:import url="logoutParcial.jsp" />
+		<br/>
+		Usuario Logado: ${usuarioLogado.login} 
+		<br/>
+		<hr />
 		
 		<c:if test="${not empty empresa}">
 			<h1>Empresa ${empresa} cadastrada com sucesso</h1>
